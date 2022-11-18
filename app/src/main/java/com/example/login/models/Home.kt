@@ -1,12 +1,12 @@
 package com.example.login.models
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.login.R
-import com.example.login.data.APIService.Companion.fetchData
 import com.example.login.data.MainRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -30,6 +30,33 @@ class Home : AppCompatActivity() {
         adapter = MoviesAdapter(movies, this)
         rvMovies.adapter = adapter
 
+
+        onClickDetails()
+
+    }
+
+    private fun onClickDetails() {
+
+        adapter.onItemClick = { movies : Movies ->
+            scope.launch {
+                /*faltaria filtro por id? */
+                showMoviesDetails(movies)
+            }
+        }
+    }
+
+    private fun showMoviesDetails(movies: Movies) {
+
+        adapter.onItemClick = {
+            val intent =   Intent(this@Home, DetailedMovies::class.java)
+            intent.putExtra("name", movies.name)
+            //intent.putExtra("thumbnail", movies.thumbnail)
+            intent.putExtra("description", movies.description)
+            intent.putExtra("modified", movies.modified)
+
+
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {
