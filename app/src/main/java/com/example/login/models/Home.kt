@@ -49,10 +49,10 @@ class Home : AppCompatActivity() {
 
         adapter.onItemClick = {
             val intent =   Intent(this@Home, DetailedMovies::class.java)
-            intent.putExtra("name", movies.name)
+            intent.putExtra("movies", it)
             //intent.putExtra("thumbnail", movies.thumbnail)
-            intent.putExtra("description", movies.description)
-            intent.putExtra("modified", movies.modified)
+            //intent.putExtra("description", movies.description)
+            //intent.putExtra("modified", movies.modified)
 
 
             startActivity(intent)

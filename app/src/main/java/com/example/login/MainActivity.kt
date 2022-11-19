@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         checkUser()
 
         //Google SingIn Button, Click to begin Google SingIn
-        binding.googleSingInBtn.setOnClickListener {
+        binding.btnGoogleSignIn.setOnClickListener {
             //begin Google SingIn
             Log.d(TAG, "onCreate: begin Google SingIn")
             val intent = googleSignInClient.signInIntent
@@ -174,6 +174,20 @@ class MainActivity : AppCompatActivity() {
                 progressDialog.stop()
             }
         }
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "función onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("MainActivity", "función onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("MainActivity", "función onDestroy")
     }
 
 

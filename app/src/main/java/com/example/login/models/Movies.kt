@@ -1,6 +1,10 @@
 package com.example.login.models
 
+import android.os.Parcelable
 import java.util.*
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 
 data class Movies (
     val id: Integer,
@@ -8,4 +12,4 @@ data class Movies (
     val description: String,
     val modified: Date,
     val thumbnail : Thumbnail
-)
+) : Parcelable
