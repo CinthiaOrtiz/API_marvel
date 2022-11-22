@@ -3,7 +3,9 @@ package com.example.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import com.example.login.databinding.ActivityProfileBinding
+import com.example.login.models.Home
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val btnBack : Button = findViewById(R.id.buttonBack)
+
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
@@ -27,6 +31,9 @@ class ProfileActivity : AppCompatActivity() {
         binding.logoutBtn.setOnClickListener {
             firebaseAuth.signOut()
             checkUser()
+        }
+        btnBack.setOnClickListener{
+            startActivity(Intent(this@ProfileActivity, Home::class.java))
         }
     }
     private fun checkUser(){

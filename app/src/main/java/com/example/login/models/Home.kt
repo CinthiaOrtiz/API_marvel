@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.login.ProfileActivity
 import com.example.login.R
 import com.example.login.data.MainRepository
 import kotlinx.coroutines.*
@@ -25,10 +27,17 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val btnExit : Button = findViewById(R.id.btnExit)
+
+
         rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
         rvMovies.layoutManager = LinearLayoutManager(this)
         adapter = MoviesAdapter(movies, this)
         rvMovies.adapter = adapter
+
+        btnExit.setOnClickListener{
+            startActivity(Intent(this@Home, ProfileActivity::class.java))
+        }
 
 
         onClickDetails()

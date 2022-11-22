@@ -24,12 +24,12 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false">
 
         </activity>
         <activity
             android:name=".models.DetailedMovies"
-            android:exported="true">
+            android:exported="false">
 
         </activity>
         <activity android:name=".models.Splash"
