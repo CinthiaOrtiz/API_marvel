@@ -25,11 +25,12 @@
         android:id="@+id/imageView5"
         android:layout_width="425dp"
         android:layout_height="508dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/prelogin"
-        tools:layout_editor_absoluteY="31dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/prelogin" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnGoogleSignIn"

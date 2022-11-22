@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ProfileActivity : AppCompatActivity() {
 
+
+
     //view binding
     private lateinit var binding: ActivityProfileBinding
 
