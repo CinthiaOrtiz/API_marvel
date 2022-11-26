@@ -17,19 +17,29 @@
         tools:layout_editor_absoluteX="31dp"
         tools:layout_editor_absoluteY="145dp">
 
-        <Button
-            android:id="@+id/btnExit"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Exit"
-            android:textColor="#FAFAFA"
-            app:backgroundTint="#A81C1C"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="1dp"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@id/btnLogout"
+            app:layout_constraintTop_toBottomOf="@+id/searchInput"
             tools:ignore="TextContrastCheck" />
 
+        <ImageButton
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/holo_red_dark"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchInput"
+
+
+            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
         <Button
             android:id="@+id/btnFavorito"
             android:layout_width="match_parent"

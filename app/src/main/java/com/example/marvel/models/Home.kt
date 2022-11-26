@@ -3,13 +3,21 @@ package com.example.marvel.models
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel.MainActivity
 import com.example.marvel.ProfileActivity
 import com.example.marvel.R
 import com.example.marvel.data.MainRepository
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -22,13 +30,21 @@ class Home : AppCompatActivity() {
     private lateinit var adapter : MoviesAdapter
     private val progessDialog by lazy { CustomProgressDialog(this) }
 
+    // firebase auth
+    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var btnLogout : ImageButton
+
+    // google logout
+    lateinit var mGoogleSignInClient : GoogleSignInClient
+    private lateinit var tvUser : TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
 
-        val btnExit : Button = findViewById(R.id.btnExit)
+       // val btnExit : Button = findViewById(R.id.btnExit)
 
 
         rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
@@ -36,13 +52,56 @@ class Home : AppCompatActivity() {
         adapter = MoviesAdapter(movies, this)
         rvMovies.adapter = adapter
 
-        btnExit.setOnClickListener{
+        /*btnExit.setOnClickListener{
             startActivity(Intent(this@Home, ProfileActivity::class.java))
-        }
-
-
+        }*/
         onClickDetails()
 
+        // handle click -> logout user
+        btnLogout = findViewById(R.id.btnLogout)
+        btnLogout.setOnClickListener {
+            mGoogleSignInClient.signOut().addOnCompleteListener {
+                firebaseAuth.signOut()
+                checkUser()
+            }
+        }
+
+        // Configure the Google Sign OUT
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
+    }
+
+    private fun checkUser() {
+        // get current user
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser == null) {
+            // user not logged in
+//            Log.d("Login", "Usuario no registrado")
+            startActivity(Intent(this@Home, MainActivity::class.java))
+            finish()
+        }
+        else {
+            // user logueado
+            // get user email
+            val email = firebaseUser.email
+            // get user
+            var user = firebaseUser.displayName
+            user = splitName(user!!)
+            // set email
+            tvUser = findViewById(R.id.tvUser)
+            tvUser.text = user;
+        }
+    }
+    private fun splitName(user: String): String {
+        return user.split(Regex(" "))[0]
     }
 
     private fun onClickDetails() {
