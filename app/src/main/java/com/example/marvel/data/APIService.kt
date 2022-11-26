@@ -36,5 +36,22 @@ class APIService {
                 ArrayList<Movies>()
             }
         }
+        fun getMovies (context: Context, user: String, query : String) : ArrayList<Movies> {
+            val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val apiEndpoint = retrofit.create(MoviesAPI::class.java)
+            val result = apiEndpoint.getMovies().execute()
+
+            if (result.isSuccessful) {
+                return result.body()!!.data.results
+            } else {
+                Log.e("Api-Service", "Error al comunicar con la API")
+                return ArrayList<Movies>()
+            }
+        }
     }
+
+
 }

@@ -4,14 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.MainActivity
-import com.example.marvel.ProfileActivity
 import com.example.marvel.R
 import com.example.marvel.data.MainRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -25,10 +26,18 @@ class Home : AppCompatActivity() {
 
     private val coroutineContext: CoroutineContext = newSingleThreadContext("uadeedemo")
     private val scope = CoroutineScope(coroutineContext)
+    private val moviesQueryContext : CoroutineContext = newSingleThreadContext("query")
+    private val  scopeQuery = CoroutineScope(moviesQueryContext)
+
+
     private lateinit var rvMovies : RecyclerView
     private var movies = ArrayList<Movies>()
     private lateinit var adapter : MoviesAdapter
     private val progessDialog by lazy { CustomProgressDialog(this) }
+    private lateinit var tvUser : TextView
+    private lateinit var searchInput: EditText
+
+
 
     // firebase auth
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -36,7 +45,7 @@ class Home : AppCompatActivity() {
 
     // google logout
     lateinit var mGoogleSignInClient : GoogleSignInClient
-    private lateinit var tvUser : TextView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +65,8 @@ class Home : AppCompatActivity() {
             startActivity(Intent(this@Home, ProfileActivity::class.java))
         }*/
         onClickDetails()
+
+        searchInput = findViewById(R.id.searchInput)
 
         // handle click -> logout user
         btnLogout = findViewById(R.id.btnLogout)
@@ -130,13 +141,10 @@ class Home : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        val user = firebaseAuth.currentUser!!.email
+
         progessDialog.start("Recuperando datos ... ")
         scope.launch {
-            //var jsonData = MainRepository.fetchData(this@MainActivity)
-            //var university = Gson().fromJson(jsonData, University::class.java)
-            //Log.d("apidemo", university.toString())
-            //var universities = MainRepository.fetchData(this@MainActivity)
-            //Log.d("apidemo", universities.size.toString())
             movies = MainRepository.fetchData(this@Home)
 
             withContext(Dispatchers.Main) {
@@ -145,5 +153,40 @@ class Home : AppCompatActivity() {
                 progessDialog.stop()
             }
         }
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(search: CharSequence?, start: Int, before: Int, count: Int) {
+                // uso las recetas que me traigo de la API por primera vez
+//                updateRecipesQueryFromRoom(recipes, search)
+
+                // hago una consulta a la API con lo que se busca -> Trae mas cantidad de recetas
+                val moviesFound = MainRepository.getMovies(this@Home, user!!, search.toString())
+                updateMoviesQuery(moviesFound)
+            }
+
+            private fun updateMoviesQueryFromRoom( moviesDB: ArrayList<Movies>, search: CharSequence?) {
+                val moviesFound = ArrayList<Movies>();
+                for (movies in moviesDB) {
+                    if  (movies.name.uppercase().contains(search.toString().uppercase())) {
+                        moviesFound.add(movies)
+                    }
+                }
+                updateMoviesQuery(moviesFound);
+            }
+
+            private fun updateMoviesQuery(moviesFound: ArrayList<Movies>) {
+                scopeQuery.launch {
+                    withContext(Dispatchers.Main) {
+                        adapter.Update(moviesFound)
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 }
