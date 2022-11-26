@@ -160,7 +160,7 @@ class Home : AppCompatActivity() {
 
             override fun onTextChanged(search: CharSequence?, start: Int, before: Int, count: Int) {
                 // uso las recetas que me traigo de la API por primera vez
-//                updateRecipesQueryFromRoom(recipes, search)
+                updateMoviesQueryFromRoom(movies, search)
 
                 // hago una consulta a la API con lo que se busca -> Trae mas cantidad de recetas
                 val moviesFound = MainRepository.getMovies(this@Home, user!!, search.toString())
@@ -188,5 +188,6 @@ class Home : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
             }
         })
+
     }
 }

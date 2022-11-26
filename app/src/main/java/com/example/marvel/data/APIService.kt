@@ -53,5 +53,7 @@ class APIService {
         }
     }
 
+    // keytool -list -v -keystore C:\Users\CapitalCity\AndroidStudioProjects\Marvel\keystore.jks -alias apkTPO|
+
 
 }
