@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.marvel
 
 import org.junit.Test
 

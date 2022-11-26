@@ -1,4 +1,4 @@
-package com.example.login.models
+package com.example.marvel.models
 
 import android.app.Activity
 import android.app.Dialog
@@ -13,7 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
-import com.example.login.R
+import com.example.marvel.R
 
 
 class CustomProgressDialog (context: Context) {
@@ -62,7 +62,7 @@ class CustomProgressDialog (context: Context) {
         }
     }
 
-    class CustomDialog(context: Context) : Dialog(context, R.style.Theme_Login) {
+    class CustomDialog(context: Context) : Dialog(context, R.style.Theme_Marvel) {
         init {
             // Set Semi-Transparent Color for Dialog Background
             window?.decorView?.rootView?.setBackgroundResource(R.color.purple_200)

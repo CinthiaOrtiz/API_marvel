@@ -1,13 +1,11 @@
-package com.example.login.models
+package com.example.marvel.models
 
-import android.content.ContentValues
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.login.R
+import com.example.marvel.R
 
 class MoviesDetailedAdapter(var items: MutableList<Movies>, context: Context) : RecyclerView.Adapter<MoviesDetailedViewHolder>() {
 

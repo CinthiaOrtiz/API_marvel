@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.marvel
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

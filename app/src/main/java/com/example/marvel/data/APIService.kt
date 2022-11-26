@@ -1,9 +1,8 @@
-package com.example.login.data
+package com.example.marvel.data
 
 import android.content.Context
 import android.util.Log
-import com.example.login.models.Movies
-import kotlinx.coroutines.delay
+import com.example.marvel.models.Movies
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

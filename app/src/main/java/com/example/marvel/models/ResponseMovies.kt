@@ -1,4 +1,4 @@
-package com.example.login.models
+package com.example.marvel.models
 
 import java.util.ArrayList
 

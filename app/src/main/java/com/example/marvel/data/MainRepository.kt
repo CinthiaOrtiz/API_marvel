@@ -1,9 +1,7 @@
-package com.example.login.data
+package com.example.marvel.data
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.login.models.Movies
+import com.example.marvel.models.Movies
 
 class MainRepository {
 

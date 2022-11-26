@@ -1,11 +1,11 @@
-package com.example.login
+package com.example.marvel
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.login.databinding.ActivityProfileBinding
-import com.example.login.models.Home
+import com.example.marvel.databinding.ActivityProfileBinding
+import com.example.marvel.models.Home
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileActivity : AppCompatActivity() {
@@ -22,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val btnBack : Button = findViewById(R.id.buttonBack)
 

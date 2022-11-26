@@ -1,4 +1,4 @@
-package com.example.login.data
+package com.example.marvel.data
 
 /**
  * A generic class that holds a value with its loading status.

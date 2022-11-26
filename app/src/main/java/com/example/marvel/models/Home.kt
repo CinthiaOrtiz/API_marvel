@@ -1,4 +1,4 @@
-package com.example.login.models
+package com.example.marvel.models
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,9 @@ import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.login.ProfileActivity
-import com.example.login.R
-import com.example.login.data.MainRepository
+import com.example.marvel.ProfileActivity
+import com.example.marvel.R
+import com.example.marvel.data.MainRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -26,6 +26,7 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        supportActionBar?.hide()
 
         val btnExit : Button = findViewById(R.id.btnExit)
 
@@ -77,16 +78,13 @@ class Home : AppCompatActivity() {
             //Log.d("apidemo", university.toString())
             //var universities = MainRepository.fetchData(this@MainActivity)
             //Log.d("apidemo", universities.size.toString())
-
             movies = MainRepository.fetchData(this@Home)
-
 
             withContext(Dispatchers.Main) {
                 Log.d("QTYITEMS", movies.size.toString())
                 adapter.Update(movies)
                 progessDialog.stop()
             }
-
         }
     }
 }

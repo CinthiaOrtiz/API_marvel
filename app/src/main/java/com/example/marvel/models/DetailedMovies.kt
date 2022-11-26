@@ -1,21 +1,21 @@
-package com.example.login.models
+package com.example.marvel.models
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.login.R
+import com.example.marvel.R
 
 class DetailedMovies : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_moviesdetailed)
+        supportActionBar?.hide()
 
         val btnBack : Button = findViewById(R.id.buttonBack)
 

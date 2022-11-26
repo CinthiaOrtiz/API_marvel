@@ -5,22 +5,9 @@
     android:id="@+id/cvView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="20dp"
     tools:context=".models.Home">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMovies"
-        android:layout_width="409dp"
-        android:layout_height="660dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011">
-    </androidx.recyclerview.widget.RecyclerView>
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -32,7 +19,7 @@
 
         <Button
             android:id="@+id/btnExit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Exit"
@@ -45,7 +32,7 @@
 
         <Button
             android:id="@+id/btnFavorito"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Favorito"
@@ -55,6 +42,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TextContrastCheck" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMovies"
+            android:layout_width="400dp"
+            android:layout_height="630dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="50dp"></androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
