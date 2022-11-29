@@ -18,6 +18,7 @@ import com.example.marvel.data.MainRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -65,9 +66,7 @@ class Home : AppCompatActivity() {
             startActivity(Intent(this@Home, ProfileActivity::class.java))
         }*/
         onClickDetails()
-
-        searchInput = findViewById(R.id.searchInput)
-
+        
         // handle click -> logout user
         btnLogout = findViewById(R.id.btnLogout)
         btnLogout.setOnClickListener {
@@ -154,33 +153,36 @@ class Home : AppCompatActivity() {
             }
         }
 
+
+
+        var searchInput = findViewById<TextInputEditText>(R.id.inputFiltro)
+        // filtro
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(search: CharSequence?, start: Int, before: Int, count: Int) {
-                // uso las recetas que me traigo de la API por primera vez
-                updateMoviesQueryFromRoom(movies, search)
-
                 // hago una consulta a la API con lo que se busca -> Trae mas cantidad de recetas
-                val moviesFound = MainRepository.getMovies(this@Home, user!!, search.toString())
-                updateMoviesQuery(moviesFound)
+                val ejercicios = buscarEjerciciosPorNombre(movies,search);
+
+                updateRecipesQuery(ejercicios)
             }
 
-            private fun updateMoviesQueryFromRoom( moviesDB: ArrayList<Movies>, search: CharSequence?) {
-                val moviesFound = ArrayList<Movies>();
-                for (movies in moviesDB) {
-                    if  (movies.name.uppercase().contains(search.toString().uppercase())) {
-                        moviesFound.add(movies)
+            private fun buscarEjerciciosPorNombre( ejercicios: ArrayList<Movies>, search: CharSequence?): ArrayList<Movies> {
+                val ejerciciosEncontrados = ArrayList<Movies>();
+
+                for(ejercicio in ejercicios){
+                    if  (ejercicio.name?.uppercase()?.contains(search.toString().uppercase()) == true) {
+                        ejerciciosEncontrados.add(ejercicio)
                     }
                 }
-                updateMoviesQuery(moviesFound);
+                return ejerciciosEncontrados
             }
 
-            private fun updateMoviesQuery(moviesFound: ArrayList<Movies>) {
-                scopeQuery.launch {
+            private fun updateRecipesQuery(ejercicios: ArrayList<Movies>) {
+                scope.launch {
                     withContext(Dispatchers.Main) {
-                        adapter.Update(moviesFound)
+                        adapter.Update(ejercicios)
                     }
                 }
             }
