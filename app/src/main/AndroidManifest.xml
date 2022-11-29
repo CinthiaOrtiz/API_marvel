@@ -32,6 +32,11 @@
             android:exported="false">
 
         </activity>
+        <activity
+            android:name="com.example.marvel.ui.Favorite"
+            android:exported="false">
+
+        </activity>
         <activity android:name="com.example.marvel.Splash"
             android:exported="true" >
             <intent-filter>

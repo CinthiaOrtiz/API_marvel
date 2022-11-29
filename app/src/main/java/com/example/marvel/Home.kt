@@ -7,6 +7,7 @@ import android.os.StrictMode
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -16,6 +17,7 @@ import com.example.marvel.data.MainRepository
 import com.example.marvel.models.CustomProgressDialog
 import com.example.marvel.models.DetailedMovies
 import com.example.marvel.models.Movies
+import com.example.marvel.ui.Favorite
 import com.example.marvel.ui.MoviesAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -51,12 +53,15 @@ class Home : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
 
        // val btnExit : Button = findViewById(R.id.btnExit)
+
+        val btnFavorito : Button = findViewById(R.id.btnFavorito)
 
 
         rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
@@ -67,6 +72,12 @@ class Home : AppCompatActivity() {
         /*btnExit.setOnClickListener{
             startActivity(Intent(this@Home, ProfileActivity::class.java))
         }*/
+
+        btnFavorito.setOnClickListener{
+            startActivity(Intent(this@Home, Favorite::class.java))
+        }
+
+
         onClickDetails()
 
         // handle click -> logout user
