@@ -66,7 +66,7 @@ class Home : AppCompatActivity() {
             startActivity(Intent(this@Home, ProfileActivity::class.java))
         }*/
         onClickDetails()
-        
+
         // handle click -> logout user
         btnLogout = findViewById(R.id.btnLogout)
         btnLogout.setOnClickListener {
@@ -163,26 +163,26 @@ class Home : AppCompatActivity() {
 
             override fun onTextChanged(search: CharSequence?, start: Int, before: Int, count: Int) {
                 // hago una consulta a la API con lo que se busca -> Trae mas cantidad de recetas
-                val ejercicios = buscarEjerciciosPorNombre(movies,search);
+                val characters = buscarCharactersPorNombre(movies,search);
 
-                updateRecipesQuery(ejercicios)
+                updateRecipesQuery(characters)
             }
 
-            private fun buscarEjerciciosPorNombre( ejercicios: ArrayList<Movies>, search: CharSequence?): ArrayList<Movies> {
-                val ejerciciosEncontrados = ArrayList<Movies>();
+            private fun buscarCharactersPorNombre(movies: ArrayList<Movies>, search: CharSequence?): ArrayList<Movies> {
+                val charactersEncontrados = ArrayList<Movies>();
 
-                for(ejercicio in ejercicios){
-                    if  (ejercicio.name?.uppercase()?.contains(search.toString().uppercase()) == true) {
-                        ejerciciosEncontrados.add(ejercicio)
+                for(allMovies in movies){
+                    if  (allMovies.name?.uppercase()?.contains(search.toString().uppercase()) == true) {
+                        charactersEncontrados.add(allMovies)
                     }
                 }
-                return ejerciciosEncontrados
+                return charactersEncontrados
             }
 
-            private fun updateRecipesQuery(ejercicios: ArrayList<Movies>) {
+            private fun updateRecipesQuery(characters: ArrayList<Movies>) {
                 scope.launch {
                     withContext(Dispatchers.Main) {
-                        adapter.Update(ejercicios)
+                        adapter.Update(characters)
                     }
                 }
             }
