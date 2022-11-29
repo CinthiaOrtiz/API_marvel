@@ -1,4 +1,4 @@
-package com.example.marvel.models
+package com.example.marvel
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +12,11 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marvel.MainActivity
-import com.example.marvel.R
 import com.example.marvel.data.MainRepository
+import com.example.marvel.models.CustomProgressDialog
+import com.example.marvel.models.DetailedMovies
+import com.example.marvel.models.Movies
+import com.example.marvel.ui.MoviesAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

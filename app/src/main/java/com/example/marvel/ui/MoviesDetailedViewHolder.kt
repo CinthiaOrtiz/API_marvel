@@ -1,4 +1,4 @@
-package com.example.marvel.models
+package com.example.marvel.ui
 
 import android.view.View
 import android.widget.ImageView

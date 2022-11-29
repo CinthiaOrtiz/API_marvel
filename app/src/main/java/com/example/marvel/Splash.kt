@@ -1,4 +1,4 @@
-package com.example.marvel.models
+package com.example.marvel
 
 
 import android.content.Intent
@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.example.marvel.MainActivity
-import com.example.marvel.R
 
 class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

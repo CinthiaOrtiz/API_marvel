@@ -3,11 +3,9 @@ package com.example.marvel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.marvel.databinding.ActivityProfileBinding
-import com.example.marvel.models.Home
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 
